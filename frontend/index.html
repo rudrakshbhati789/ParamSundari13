@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Param Sundari – Custom Clothes for Couples</title>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:#0b0b0b;color:#fff;}
+
+    /* NAVBAR */
+    header{
+      background:#111;padding:15px 20px;
+      display:flex;justify-content:space-between;align-items:center;
+      box-shadow:0 2px 10px rgba(183,110,121,0.4);
+      position:sticky;top:0;z-index:2000;
+    }
+    .logo{
+      color:#b76e79;font-size:1.4rem;font-weight:700;
+    }
+
+    nav{
+      display:flex;gap:20px;
+    }
+
+    nav a{
+      color:#b76e79;text-decoration:none;font-size:1rem;
+      transition:.3s;
+    }
+    nav a:hover{color:#d2959e;}
+
+    /* HAMBURGER (mobile) */
+    .hamburger{
+      display:none;
+      flex-direction:column;
+      cursor:pointer;
+      gap:5px;
+    }
+    .hamburger div{
+      width:25px;height:3px;background:#b76e79;border-radius:5px;
+    }
+
+    /* MOBILE NAV MENU */
+    @media(max-width:760px){
+      nav{
+        display:none;
+        position:absolute;
+        top:60px;right:20px;
+        background:#111;
+        padding:15px 20px;
+        border-radius:12px;
+        flex-direction:column;
+        gap:15px;
+        box-shadow:0 0 15px rgba(183,110,121,0.4);
+      }
+      nav.show{display:flex;}
+      .hamburger{display:flex;}
+    }
+
+    /* HERO */
+    .hero{
+      text-align:center;
+      padding:70px 20px;
+      background:url('https://i.ibb.co/CH7nJ9T/bg.jpg') center/cover no-repeat;
+      background-blend-mode:overlay;
+      background-color:rgba(0,0,0,0.6);
+    }
+    .hero h1{
+      color:#b76e79;
+      font-size:2.3rem;
+      text-shadow:0 0 15px rgba(183,110,121,0.7);
+      margin-bottom:12px;
+    }
+    .hero p{
+      max-width:600px;
+      margin:auto;
+      font-size:1rem;
+      line-height:1.5;
+      color:#ddd;
+    }
+
+    @media(max-width:600px){
+      .hero h1{font-size:1.8rem;}
+      .hero p{font-size:.9rem;}
+    }
+
+    /* SECTION TITLES */
+    .section-title{
+      margin:40px 0 15px;
+      text-align:center;
+      color:#b76e79;
+      font-size:1.7rem;
+      text-shadow:0 0 10px rgba(183,110,121,0.5);
+    }
+
+    /* TOP SELLING CAROUSEL */
+    .carousel-container{
+      position:relative;
+      max-width:900px;margin:auto;
+      overflow:hidden;padding:0 15px;
+    }
+
+    .product-carousel{
+      display:flex;gap:20px;padding:10px;
+      overflow-x:auto;
+      scroll-behavior:smooth;
+    }
+    .product-carousel::-webkit-scrollbar{display:none;}
+
+    .product-card{
+      flex:0 0 auto;width:220px;
+      background:rgba(255,255,255,0.05);
+      border-radius:12px;padding:15px;text-align:center;
+      box-shadow:0 0 10px rgba(183,110,121,0.2);
+      transition:.3s;
+    }
+    .product-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 0 15px rgba(183,110,121,0.4);
+    }
+    .product-card img{
+      width:100%;height:220px;border-radius:10px;object-fit:cover;
+    }
+    .product-card h3{color:#b76e79;margin:8px 0;}
+    .product-card p{color:#fff;}
+
+    .carousel-btn{
+      position:absolute;top:50%;transform:translateY(-50%);
+      background:rgba(183,110,121,0.8);
+      border:none;color:#fff;font-size:22px;
+      padding:8px 12px;border-radius:50%;cursor:pointer;
+    }
+    .prev{left:5px;} .next{right:5px;}
+
+    @media(max-width:700px){
+      .carousel-btn{display:none;}
+      .product-card{width:160px;}
+    }
+
+    /* REVIEWS */
+    #reviewsContainer{
+      display:flex;flex-wrap:wrap;justify-content:center;
+      gap:20px;max-width:1000px;margin:auto;padding:10px;
+    }
+
+    .review-card{
+      background:rgba(255,255,255,0.05);
+      border-radius:15px;padding:20px;width:280px;
+      box-shadow:0 0 10px rgba(183,110,121,0.2);
+    }
+    .review-card h4{color:#b76e79;margin-bottom:6px;}
+    .review-card .rating{color:gold;margin-bottom:8px;}
+    .review-card p{color:#ddd;font-size:.9rem;}
+
+    /* VIEW ALL BUTTON */
+    .btn{
+      display:block;margin:20px auto;
+      padding:10px 20px;
+      background:#b76e79;color:#fff;
+      border:none;border-radius:10px;
+      font-size:1rem;width:200px;
+      text-align:center;cursor:pointer;
+      transition:.3s;
+    }
+    .btn:hover{
+      background:#d2959e;
+    }
+
+    footer{
+      text-align:center;padding:20px;color:#b76e79;
+      margin-top:30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="logo">Param Sundari ✨</div>
+
+    <nav id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="product.html">Products</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div><div></div><div></div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Param Sundari by Sweeta ✨</h1>
+    <p>
+      Discover premium customised couple outfits in stunning rose-gold and black aesthetics.
+      Made with love, crafted for elegance.
+    </p>
+  </section>
+
+  <!-- TOP SELLING -->
+  <section>
+    <h2 class="section-title">🌸 Top Selling Products</h2>
+
+    <div class="carousel-container">
+      <button class="carousel-btn prev" id="prevBtn">❮</button>
+
+      <div class="product-carousel" id="topProducts">
+        <p>Loading...</p>
+      </div>
+
+      <button class="carousel-btn next" id="nextBtn">❯</button>
+    </div>
+
+    <button class="btn" onclick="location.href='product.html'">View All Products</button>
+  </section>
+
+  <!-- REVIEWS -->
+  <section>
+    <h2 class="section-title">💬 Customer Reviews</h2>
+
+    <div id="reviewsContainer">
+      <p id="loadingReviews">Loading...</p>
+    </div>
+  </section>
+
+  <footer>© 2025 Param Sundari – Custom Clothes for Couples</footer>
+
+  <script>
+    const backendURL = "http://localhost:5000";
+
+    function toggleMenu(){
+      document.getElementById("navMenu").classList.toggle("show");
+    }
+
+    // TOP SELLING
+    async function loadTopProducts() {
+      try {
+        const res = await fetch(`${backendURL}/api/products`);
+        const products = await res.json();
+
+        const top = products.filter(p => p.topSelling);
+        const container = document.getElementById("topProducts");
+
+        if (!top.length){
+          container.innerHTML = "<p>No top selling items yet</p>";
+          return;
+        }
+
+        container.innerHTML = top.map(p => `
+          <div class="product-card">
+            <img src="${backendURL}${p.image}" />
+            <h3>${p.name}</h3>
+            <p>₹${p.price}</p>
+          </div>
+        `).join("");
+
+      } catch {
+        document.getElementById("topProducts").innerHTML =
+          "<p style='color:red;'>Failed to load.</p>";
+      }
+    }
+
+    // REVIEWS
+    async function loadReviews(){
+      try {
+        const res = await fetch(`${backendURL}/api/reviews`);
+        const reviews = await res.json();
+        const container = document.getElementById("reviewsContainer");
+        document.getElementById("loadingReviews").style.display = "none";
+
+        if (!reviews.length){
+          container.innerHTML = "<p>No reviews yet</p>";
+          return;
+        }
+
+        container.innerHTML = reviews.map(r => `
+          <div class="review-card">
+            <h4>${r.name}</h4>
+            <span class="rating">${"⭐".repeat(r.rating)}</span>
+            <p>${r.message}</p>
+          </div>
+        `).join("");
+
+      } catch(err){
+        document.getElementById("reviewsContainer").innerHTML =
+          "<p style='color:red;'>Failed to load reviews.</p>";
+      }
+    }
+
+    // CAROUSEL BUTTONS
+    document.getElementById("nextBtn").onclick = () =>
+      document.getElementById("topProducts")
+        .scrollBy({ left:300, behavior:"smooth" });
+
+    document.getElementById("prevBtn").onclick = () =>
+      document.getElementById("topProducts")
+        .scrollBy({ left:-300, behavior:"smooth" });
+
+    loadTopProducts();
+    loadReviews();
+  </script>
+
+</body>
+</html>

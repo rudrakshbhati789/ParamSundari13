@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Checkout | Param Sundari</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Param Sundari</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="product.html">Products</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <h2 style="color:var(--rose-gold);margin-bottom:20px;">Place Your Order</h2>
+    <form id="checkoutForm" style="max-width:400px;margin:auto;display:flex;flex-direction:column;gap:10px;">
+      <input type="text" placeholder="Full Name" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <input type="text" placeholder="Address" required>
+      <input type="text" placeholder="City" required>
+      <input type="text" placeholder="Pincode" required>
+      <button type="submit" style="background:var(--rose-gold);color:#000;padding:10px;border:none;border-radius:6px;font-weight:600;">Submit Order</button>
+    </form>
+  </section>
+</main>
+
+<footer><p>© 2025 Param Sundari – Custom Clothes for Couples</p></footer>
+
+<script>
+document.getElementById("checkoutForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  const [name,phone,address,city,pincode]=Array.from(this.elements).map(i=>i.value);
+  const msg=`New order from ${name}\n📞 ${phone}\n🏠 ${address}, ${city} – ${pincode}\nThank you for shopping with Param Sundari!`;
+  const url=`https://wa.me/919993658088?text=${encodeURIComponent(msg)}`;
+  alert("✅ Order Placed! Redirecting to WhatsApp…");
+  window.location.href=url;
+});
+</script>
+</body>
+</html>

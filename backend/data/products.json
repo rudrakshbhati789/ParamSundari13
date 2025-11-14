@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1763036477420,
+    "name": "p4",
+    "price": 1199,
+    "description": "green",
+    "topSelling": false,
+    "image": "/uploads/1763036477416-WhatsApp Image 2025-11-08 at 16.38.37.jpeg"
+  },
+  {
+    "id": 1763036456499,
+    "name": "p3",
+    "price": 999,
+    "description": "black",
+    "topSelling": false,
+    "image": "/uploads/1763036456495-WhatsApp Image 2025-11-08 at 16.38.36.jpeg"
+  },
+  {
+    "id": 1763036438308,
+    "name": "p2",
+    "price": 899,
+    "description": "yellow",
+    "topSelling": true,
+    "image": "/uploads/1763036438303-WhatsApp Image 2025-11-08 at 16.38.34 (2).jpeg"
+  },
+  {
+    "id": 1763036406630,
+    "name": "p1",
+    "price": 799,
+    "description": "red",
+    "topSelling": true,
+    "image": "/uploads/1763036406615-WhatsApp Image 2025-11-08 at 16.38.38.jpeg"
+  }
+]

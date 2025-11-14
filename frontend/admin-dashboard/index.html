@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Param Sundari</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header><h1>Admin Dashboard</h1></header>
+
+  <main style="margin-top:100px;text-align:center;">
+    <h2>Welcome, Sweeta 👑</h2>
+
+    <section>
+      <h3 style="color:var(--rose-gold);margin-top:20px;">Add New Product</h3>
+      <form id="addProductForm" style="max-width:400px;margin:auto;display:flex;flex-direction:column;gap:10px;">
+        <input type="text" id="name" placeholder="Product Name" required>
+        <input type="number" id="price" placeholder="Price" required>
+        <input type="file" id="image" required>
+        <button type="submit" style="background:var(--rose-gold);border:none;padding:8px;border-radius:6px;">Upload Product</button>
+      </form>
+    </section>
+
+    <section>
+      <h3 style="color:var(--rose-gold);margin-top:40px;">Current Products</h3>
+      <div id="productList"></div>
+    </section>
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

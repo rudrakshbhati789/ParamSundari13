@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1763037647906,
+    "name": "Rudraksh Bhati",
+    "phone": "7898053366",
+    "city": "indore",
+    "pincode": "452011",
+    "address": "126",
+    "total": 2198,
+    "cart": [],
+    "date": "13/11/2025, 6:10:47 pm"
+  },
+  {
+    "id": 1763037906780,
+    "name": "Rudraksh Bhati",
+    "phone": "7898053366",
+    "city": "indore",
+    "pincode": "452011",
+    "address": "126",
+    "total": 2198,
+    "cart": [],
+    "date": "13/11/2025, 6:15:06 pm"
+  },
+  {
+    "id": 1763041068946,
+    "name": "ratna",
+    "phone": "9993725991",
+    "city": "indore",
+    "pincode": "452011",
+    "address": "subha nagar",
+    "total": 1199,
+    "cart": [],
+    "date": "13/11/2025, 7:07:48 pm"
+  },
+  {
+    "id": 1763041481564,
+    "name": "Rudraksh Bhati",
+    "phone": "7898053366",
+    "city": "indore",
+    "pincode": "4522011",
+    "address": "126",
+    "total": 999,
+    "cart": [
+      {
+        "id": 1763036456499,
+        "name": "p3",
+        "price": 999,
+        "size": "S"
+      }
+    ],
+    "date": "13/11/2025, 7:14:41 pm"
+  },
+  {
+    "id": 1763041789596,
+    "name": "Rudraksh Bhati",
+    "phone": "7898053366",
+    "city": "indore",
+    "pincode": "452011",
+    "address": "126 shubash nagar",
+    "total": 1199,
+    "cart": [
+      {
+        "id": 1763036477420,
+        "name": "p4",
+        "price": 1199,
+        "size": "XXXL"
+      }
+    ],
+    "date": "13/11/2025, 7:19:49 pm"
+  }
+]
