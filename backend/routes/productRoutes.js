@@ -1,38 +1,67 @@
 import express from "express";
+import fs from "fs";
 import multer from "multer";
-import Product from "../models/Product.js";
-import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
+const productsFile = "./products.json";
 
-// File upload config
+// Ensure file exists
+if (!fs.existsSync(productsFile)) fs.writeFileSync(productsFile, "[]");
+
+// Helpers
+function readProducts() {
+  return JSON.parse(fs.readFileSync(productsFile));
+}
+function writeProducts(data) {
+  fs.writeFileSync(productsFile, JSON.stringify(data, null, 2));
+}
+
+// Multer for image upload
 const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+  destination: (req, file, cb) => {
+    if (!fs.existsSync("uploads")) fs.mkdirSync("uploads");
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  }
 });
 const upload = multer({ storage });
 
-// Add product (ADMIN)
-router.post("/", protect, upload.single("image"), async (req, res) => {
-  try {
-    const product = new Product({
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      size: req.body.size,
-      image: req.file ? `/uploads/${req.file.filename}` : "",
-    });
-    await product.save();
-    res.json({ success: true, product });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
+/* ----------- ROUTES ----------- */
+
+// GET all products
+router.get("/", (req, res) => {
+  const products = readProducts();
+  res.json(products);
 });
 
-// Get all products (PUBLIC)
-router.get("/", async (req, res) => {
-  const products = await Product.find().sort({ createdAt: -1 });
-  res.json(products);
+// ADD a product
+router.post("/", upload.single("image"), (req, res) => {
+  const products = readProducts();
+
+  const newProduct = {
+    id: Date.now(),
+    name: req.body.name,
+    price: req.body.price,
+    description: req.body.description || "",
+    size: req.body.size || "Free Size",
+    topSelling: req.body.topSelling === "true",
+    image: req.file ? `/uploads/${req.file.filename}` : ""
+  };
+
+  products.push(newProduct);
+  writeProducts(products);
+
+  res.json({ success: true, product: newProduct });
+});
+
+// DELETE product
+router.delete("/:id", (req, res) => {
+  let products = readProducts();
+  products = products.filter(p => p.id != req.params.id);
+  writeProducts(products);
+  res.json({ success: true });
 });
 
 export default router;
