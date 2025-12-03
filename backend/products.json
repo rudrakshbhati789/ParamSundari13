@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": 1763272769860,
+    "name": "Kurti",
+    "price": "1500",
+    "description": "this is kurta",
+    "size": "Free Size",
+    "topSelling": true,
+    "image": "/uploads/1763272769854-WhatsApp Image 2025-11-15 at 18.00.08 (3).jpeg"
+  }
+]

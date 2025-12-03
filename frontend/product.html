@@ -1,227 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Products | Param Sundari</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products – Param Sundari</title>
 
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-    body{background:#0b0b0b;color:#fff;min-height:100vh;}
+<style>
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: Poppins, sans-serif;
+}
 
-    /* NAVBAR */
-    header{
-      background:#111;
-      padding:15px 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      box-shadow:0 2px 10px rgba(183,110,121,0.3);
-      position:sticky;
-      top:0;
-      z-index:1000;
-    }
-    header h1{
-      color:#b76e79;
-      font-size:1.4rem;
-      font-weight:600;
-    }
-    header a{
-      color:#b76e79;
-      text-decoration:none;
-      font-size:.95rem;
-    }
+/* NAVBAR */
+nav {
+    background: #000;
+    padding: 15px;
+    display: flex;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+}
+nav a {
+    color: #ffb5c8;
+    text-decoration: none;
+    font-weight: 600;
+}
 
-    /* PRODUCT GRID */
-    .product-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:15px;
-      padding:20px;
-      max-width:900px;
-      margin:auto;
-    }
+/* PRODUCT GRID */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* ⭐ default = 2 products per row */
+    gap: 15px;
+    padding: 15px;
+}
 
-    @media(min-width:768px){
-      .product-grid{
-        grid-template-columns:repeat(3,1fr);
-      }
+/* Tablet */
+@media (min-width: 600px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
-    @media(min-width:1024px){
-      .product-grid{
-        grid-template-columns:repeat(4,1fr);
-      }
-    }
+}
 
-    /* PRODUCT CARD */
-    .product-card{
-      background:rgba(255,255,255,0.05);
-      border-radius:10px;
-      padding:10px;
-      text-align:center;
-      box-shadow:0 0 10px rgba(183,110,121,0.2);
-      transition:.3s;
+/* Desktop */
+@media (min-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
-    .product-card:hover{
-      transform:translateY(-5px);
-      box-shadow:0 0 15px rgba(183,110,121,0.4);
-    }
+}
 
-    .product-card img{
-      width:100%;
-      height:200px;
-      object-fit:cover;
-      border-radius:10px;
-    }
+.product-card {
+    background: #111;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #ffb5c8;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255,182,193,0.3);
+}
 
-    .product-card h3{
-      color:#b76e79;
-      margin:8px 0;
-      font-size:1rem;
-      height:40px;
-    }
+.product-card img {
+    width: 100%;
+    height: 180px; /* ⭐ Perfect size */
+    object-fit: cover;
+    border-radius: 10px;
+}
 
-    .price{
-      font-size:1rem;
-      color:#fff;
-      font-weight:600;
-      margin-bottom:8px;
-    }
-
-    /* SIZE SELECT */
-    .size-select{
-      width:100%;
-      padding:8px;
-      background:#1a1a1a;
-      border-radius:8px;
-      color:#fff;
-      border:none;
-      margin-bottom:10px;
-      font-size:.9rem;
-    }
-
-    /* BUTTONS */
-    .btn{
-      background:#b76e79;
-      border:none;
-      color:#fff;
-      padding:10px;
-      border-radius:8px;
-      cursor:pointer;
-      width:100%;
-      font-size:.95rem;
-      margin-top:5px;
-      transition:.3s;
-    }
-    .btn:hover{
-      background:#d2959e;
-    }
-
-    .whatsapp-btn{
-      background:#25D366;
-      margin-top:8px;
-    }
-    .whatsapp-btn:hover{
-      background:#1eb95e;
-    }
-
-  </style>
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <header>
-    <h1>Our Products</h1>
-    <a href="index.html">← Home</a>
-  </header>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="product.html">Products</a>
+    <a href="cart.html">Cart</a>
+</nav>
 
-  <!-- PRODUCTS -->
-  <div class="product-grid" id="productList">
-    <p style="grid-column:1/-1;text-align:center;color:#b76e79;">Loading products...</p>
-  </div>
+<h2 style="text-align:center;color:#ffb5c8;">Our Products</h2>
 
-  <script>
-    const backendURL = "https://backend-0slk.onrender.com";
-    const whatsappNumber = "919993658088"; // Customer direct WhatsApp
+<div id="product-list" class="product-grid">Loading...</div>
 
-    async function loadProducts() {
-      try {
-        const res = await fetch(`${backendURL}/api/products`);
-        const products = await res.json();
+<script>
+const backendURL = "https://backend-0slk.onrender.com";
 
-        const container = document.getElementById("productList");
+/* -----------------------
+   LOAD PRODUCTS
+------------------------ */
+async function loadProducts() {
+    try {
+        let res = await fetch(`${backendURL}/api/products`);
+        let products = await res.json();
 
-        if (!products.length){
-          container.innerHTML = "<p>No products found.</p>";
-          return;
-        }
+        const box = document.getElementById("product-list");
+        box.innerHTML = "";
 
-        container.innerHTML = products.map(p => `
-          <div class="product-card">
-            <img src="${backendURL}${p.image}" alt="${p.name}">
-            <h3>${p.name}</h3>
-            <p class="price">₹${p.price}</p>
+        products.forEach(p => {
+            box.innerHTML += `
+            <div class="product-card">
+                <img src="${backendURL}${p.image}">
+                <h3 style="color:#ffb5c8;">${p.name}</h3>
+                <p>₹${p.price}</p>
 
-            <select class="size-select" id="size-${p._id}">
-              <option value="Free Size">Size: Free Size</option>
-              <option value="S">Size: S</option>
-              <option value="M">Size: M</option>
-              <option value="L">Size: L</option>
-              <option value="XL">Size: XL</option>
-              <option value="XXL">Size: XXL</option>
-            </select>
+                <label style="color:#ffb5c8;">Size:</label>
+                <select id="size-${p.id}" 
+                    style="width:100%; padding:8px; margin-top:8px;
+                    background:#000; color:white; border:1px solid #ffb5c8; border-radius:8px;">
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                    <option value="XXXL">XXXL</option>
+                </select>
 
-            <button class="btn" onclick='addToCart(${JSON.stringify(p)})'>Add to Cart</button>
+                <button onclick='addToCartWithSize(${JSON.stringify(p)})' 
+                    style="background:#ffb5c8;">Add to Cart</button>
 
-            <button class="btn whatsapp-btn" onclick='buyNow(${JSON.stringify(p)})'>
-              Buy on WhatsApp
-            </button>
-          </div>
-        `).join("");
+                <button onclick='orderNowWithSize(${JSON.stringify(p)})'
+                    style="background:#25D366;">Order on WhatsApp</button>
+            </div>
+            `;
+        });
 
-      } catch(err){
-        document.getElementById("productList").innerHTML =
-          "<p style='color:red;'>Failed to load products.</p>";
-      }
+    } catch (error) {
+        document.getElementById("product-list").innerHTML = "Failed to load products.";
+        console.error("Error:", error);
     }
+}
+loadProducts();
 
-    // ===== ADD TO CART =====
-    function addToCart(product){
-      let size = document.getElementById(`size-${product._id}`).value;
+/* -----------------------
+   ADD TO CART WITH SIZE
+------------------------ */
+function addToCartWithSize(product) {
+    let size = document.getElementById(`size-${product.id}`).value;
 
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-      cart.push({
-        name: product.name,
-        price: product.price,
-        size,
-        image: product.image
-      });
+    cart.push({
+        ...product,
+        selectedSize: size
+    });
 
-      localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-      alert("Added to Cart! 🛍️");
-    }
+    alert("Added to cart with size: " + size);
+}
 
-    // ===== BUY NOW (WHATSAPP DIRECT) =====
-    function buyNow(product){
-      const size = document.getElementById(`size-${product._id}`).value;
+/* -----------------------
+   WHATSAPP ORDER WITH SIZE
+------------------------ */
+function orderNowWithSize(product) {
+    let size = document.getElementById(`size-${product.id}`).value;
 
-      let msg =
-        `🛍️ *New Product Inquiry*` +
-        `\n\nProduct: ${product.name}` +
-        `\nPrice: ₹${product.price}` +
-        `\nSize: ${size}` +
-        `\n\n— From Param Sundari Website 💖`;
+    let msg =
+        `Hello Param Sundari,%0A%0AI want to order:%0A` +
+        `Product: ${product.name}%0A` +
+        `Price: ₹${product.price}%0A` +
+        `Size: ${size}%0A`;
 
-      const encoded = encodeURIComponent(msg);
-      const url = `https://wa.me/${whatsappNumber}?text=${encoded}`;
-      window.open(url, "_blank");
-    }
-
-    loadProducts();
-  </script>
+    window.location.href = `https://wa.me/9993658088?text=${msg}`;
+}
+</script>
 
 </body>
 </html>

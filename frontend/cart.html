@@ -1,305 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Your Cart | Param Sundari</title>
-
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-    body{background:#0b0b0b;color:#fff;min-height:100vh;}
-
-    /* HEADER */
-    header{
-      background:#111;padding:15px 20px;display:flex;
-      justify-content:space-between;align-items:center;
-      box-shadow:0 2px 10px rgba(183,110,121,0.3);
-    }
-    header h1{
-      font-size:1.3rem;
-      color:#b76e79;
-    }
-    header a{
-      font-size:.9rem;
-      color:#b76e79;
-      text-decoration:none;
-    }
-
-    /* MAIN */
-    main{
-      max-width:900px;margin:20px auto;padding:15px;
-    }
-
-    /* CART ITEM */
-    .cart-item{
-      background:rgba(255,255,255,0.05);
-      margin-bottom:15px;padding:12px;border-radius:10px;
-      display:flex;align-items:center;gap:12px;
-    }
-
-    .cart-item img{
-      width:70px;height:70px;border-radius:8px;object-fit:cover;
-    }
-
-    .cart-info h3{
-      font-size:1rem;
-      color:#b76e79;
-      margin-bottom:3px;
-    }
-    .cart-info p{
-      font-size:.85rem;color:#ccc;line-height:1.2;
-    }
-
-    .remove-btn{
-      background:#ff4f4f;color:#fff;border:none;
-      padding:6px 8px;border-radius:6px;
-      white-space:nowrap;
-      font-size:.8rem;
-      cursor:pointer;
-    }
-
-    .total-box{
-      text-align:right;
-      margin-top:10px;
-      font-size:1.2rem;
-      color:#b76e79;
-      font-weight:600;
-    }
-
-    /* FORM */
-    form{
-      background:rgba(255,255,255,0.05);
-      padding:20px;
-      border-radius:10px;
-      margin-top:25px;
-    }
-
-    input,textarea{
-      width:100%;padding:12px;margin:8px 0;
-      background:#1a1a1a;border:none;color:#fff;
-      border-radius:6px;font-size:.95rem;
-    }
-
-    button{
-      background:#b76e79;border:none;color:#fff;
-      padding:14px;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:1rem;
-      font-weight:600;
-      width:100%;
-      margin-top:10px;
-    }
-
-    button:active{
-      transform:scale(.97);
-    }
-
-    /* ORDER PLACED POPUP */
-    .popup{
-      position:fixed;
-      top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.75);
-      display:none;align-items:center;justify-content:center;
-      z-index:5000;
-      padding:20px;
-    }
-
-    .popup-content{
-      background:#111;
-      padding:30px 25px;
-      border-radius:16px;
-      text-align:center;
-      width:100%;
-      max-width:330px;
-      animation:popIn .4s ease-out;
-      box-shadow:0 0 20px rgba(183,110,121,0.5);
-    }
-
-    @keyframes popIn{
-      from{transform:scale(0.7);opacity:0;}
-      to{transform:scale(1);opacity:1;}
-    }
-
-    .checkmark-circle{
-      width:70px;height:70px;border-radius:50%;
-      border:4px solid #b76e79;
-      display:flex;align-items:center;justify-content:center;
-      margin:0 auto 15px;
-      animation:glow 1.5s infinite alternate;
-    }
-
-    @keyframes glow{
-      from{box-shadow:0 0 8px rgba(183,110,121,0.3);}
-      to{box-shadow:0 0 20px rgba(183,110,121,0.8);}
-    }
-
-    .checkmark{
-      width:30px;height:18px;
-      border-left:4px solid #b76e79;
-      border-bottom:4px solid #b76e79;
-      transform:rotate(-45deg);
-    }
-
-    /* MOBILE FIXES */
-    @media(max-width:480px){
-      .cart-item{
-        padding:10px;
-      }
-      .cart-info h3{
-        font-size:.95rem;
-      }
-      .cart-info p{
-        font-size:.8rem;
-      }
-      .remove-btn{
-        padding:5px 7px;
-        font-size:.75rem;
-      }
-    }
-
-  </style>
+<meta charset="UTF-8">
+<title>Cart – Param Sundari</title>
+<style>
+body { background:#000; color:#fff; font-family:Poppins; margin:0; }
+nav { background:#000; padding:15px; display:flex; gap:10px; }
+nav a { color:#ffb5c8; text-decoration:none; }
+.cart-item { background:#111; padding:10px; margin:10px; border:1px solid #ffb5c8; border-radius:10px; }
+input { width:90%; padding:10px; margin:10px; border-radius:8px; border:1px solid #ffb5c8; }
+button { width:90%; padding:12px; background:#ffb5c8; border:none; margin:10px; }
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>🛒 Your Cart</h1>
-    <a href="product.html">← Continue</a>
-  </header>
+<nav>
+<a href="index.html">Home</a>
+<a href="product.html">Products</a>
+</nav>
 
-  <main>
-    <div id="cartItems"></div>
-    <div class="total-box">Total: ₹<span id="totalAmount">0</span></div>
+<h2 style="text-align:center;color:#ffb5c8;">Your Cart</h2>
 
-    <!-- DELIVERY FORM -->
-    <form id="orderForm">
-      <h2 style="color:#b76e79;margin-bottom:10px;">Delivery Details</h2>
+<div id="cart-items"></div>
+<h3 id="total" style="text-align:center; color:#ffb5c8;"></h3>
 
-      <input type="text" id="name" placeholder="Full Name" required>
-      <input type="tel" id="phone" placeholder="Phone Number" required>
-      <input type="text" id="city" placeholder="City" required>
-      <input type="text" id="pincode" placeholder="Pincode" required>
-      <textarea id="address" rows="3" placeholder="Full Address" required></textarea>
+<h3 style="text-align:center;color:#ffb5c8;">Customer Details</h3>
 
-      <button type="submit">Place Order</button>
-    </form>
-  </main>
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Phone Number">
+<input id="address" placeholder="Full Address">
+<input id="city" placeholder="City">
+<input id="pincode" placeholder="Pincode">
 
-  <!-- ORDER SUCCESS POPUP -->
-  <div id="orderPopup" class="popup">
-    <div class="popup-content">
-      <div class="checkmark-circle">
-        <div class="checkmark"></div>
-      </div>
-      <h2 style="color:#b76e79;font-size:1.4rem;">Order Placed ✓</h2>
-      <p style="font-size:.95rem;color:#ccc;">Redirecting to WhatsApp…</p>
-    </div>
-  </div>
+<button onclick="placeOrder()">Place Order</button>
 
-  <script>
-    const backendURL =  "https://backend-0slk.onrender.com";
-    const whatsappNumber = "919993658088"; // MUST have country code
+<script>
+const backendURL = "https://backend-0slk.onrender.com";
 
-    let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    function renderCart() {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
+function loadCart() {
+    const box = document.getElementById("cart-items");
+    let total = 0;
 
-      const container = document.getElementById("cartItems");
-      const totalBox = document.getElementById("totalAmount");
+    box.innerHTML = "";
 
-      if (cart.length === 0) {
-        container.innerHTML = "<p>Your cart is empty 🛍️</p>";
-        totalBox.textContent = "0";
-        return;
-      }
-
-      let total = 0;
-
-      container.innerHTML = cart.map((item, i) => {
+    cart.forEach(item => {
         total += Number(item.price);
-
-        return `
-          <div class="cart-item">
-            <img src="${backendURL}${item.image}">
-            <div class="cart-info">
-              <h3>${item.name}</h3>
-              <p>Size: ${item.size || "Free Size"}</p>
-              <p>₹${item.price}</p>
-            </div>
-            <button class="remove-btn" onclick="removeItem(${i})">Remove</button>
-          </div>`;
-      }).join("");
-
-      totalBox.textContent = total;
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
-    }
-
-    function showOrderPopup(whatsappURL) {
-      document.getElementById("orderPopup").style.display = "flex";
-
-      setTimeout(() => {
-        window.open(whatsappURL, "_blank");
-        localStorage.removeItem("cart");
-      }, 2500);
-    }
-
-    document.getElementById("orderForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-      if (cart.length === 0)
-        return alert("Your cart is empty!");
-
-      const total = cart.reduce((sum, i) => sum + Number(i.price), 0);
-
-      const order = {
-        name: name.value.trim(),
-        phone: phone.value.trim(),
-        city: city.value.trim(),
-        pincode: pincode.value.trim(),
-        address: address.value.trim(),
-        total,
-        cart
-      };
-
-      await fetch(`${backendURL}/api/orders`, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(order)
-      });
-
-      // WHATSAPP MESSAGE
-      let msg =
-        `🛍️ *New Order Placed!*` +
-        `\n\n👤 *Name:* ${order.name}` +
-        `\n📞 *Phone:* ${order.phone}` +
-        `\n🏙️ *City:* ${order.city}` +
-        `\n📮 *Pincode:* ${order.pincode}` +
-        `\n🏠 *Address:* ${order.address}\n\n` +
-        `🧾 *Order Summary:*\n`;
-
-      cart.forEach(i => {
-        msg += `• ${i.name} (${i.size || "Free Size"}) – ₹${i.price}\n`;
-      });
-
-      msg += `\n💰 *Total:* ₹${order.total}\n\n— Sent from Param Sundari 💖`;
-
-      const encoded = encodeURIComponent(msg);
-      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encoded}`;
-
-      showOrderPopup(whatsappURL);
+        box.innerHTML += `
+        <div class='cart-item'>
+            <h3>${item.name}</h3>
+            <p>₹${item.price}</p>
+        </div>`;
     });
 
-    renderCart();
-  </script>
+    document.getElementById("total").innerText = "Total: ₹" + total;
+}
+loadCart();
+
+async function placeOrder() {
+    let order = {
+        name: name.value,
+        phone: phone.value,
+        address: address.value,
+        city: city.value,
+        pincode: pincode.value,
+        cart,
+        total: cart.reduce((a,b)=>a+Number(b.price),0)
+    };
+
+    await fetch(`${backendURL}/api/orders`, {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(order)
+    });
+
+    let msg = `New Order:%0AName:${order.name}%0APhone:${order.phone}%0AAddress:${order.address}%0ACity:${order.city}%0APincode:${order.pincode}%0A`;
+
+    cart.forEach(i => msg += `• ${i.name} – ₹${i.price}%0A`);
+
+    msg += `Total: ₹${order.total}`;
+
+    window.location.href = `https://wa.me/+919993658088?text=${msg}`;
+
+    alert("Order placed!");
+    localStorage.removeItem("cart");
+}
+</script>
 
 </body>
 </html>

@@ -16,13 +16,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // STATIC FOLDERS
-app.use("/uploads", express.static("uploads"));  // for images
-app.use(express.static("public"));              // admin-dashboard.html
+app.use("/uploads", express.static("uploads"));  // image upload folder
+app.use(express.static("public"));               // admin dashboard folder
 
-// CREATE JSON FILES IF MISSING
-const files = ["products.json", "orders.json", "reviews.json"];
-files.forEach(file => {
-  if (!fs.existsSync(file)) fs.writeFileSync(file, "[]");
+// CREATE JSON FILES IF THEY DON'T EXIST
+const jsonFiles = ["products.json", "orders.json", "reviews.json"];
+
+jsonFiles.forEach(file => {
+  if (!fs.existsSync(file)) {
+    fs.writeFileSync(file, "[]");
+    console.log(`Created missing file: ${file}`);
+  }
 });
 
 // USE ROUTES
@@ -30,13 +34,18 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-// DEFAULT ROUTE
+// TEST ROUTE
 app.get("/", (req, res) => {
   res.send("Param Sundari Backend Running ✔");
 });
 
-// START SERVER
-const PORT = 5000;
+// FIXED PORT LOGGING
+const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(`Backend server running on port ${PORT} ✔`);
+  console.log("───────────────────────────────────────");
+  console.log(" PARAM SUNDARI BACKEND STARTED SUCCESSFULLY ");
+  console.log(" Your backend is running on: ");
+  console.log(` 👉  http://localhost:${PORT}`);
+  console.log("───────────────────────────────────────");
 });

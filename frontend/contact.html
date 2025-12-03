@@ -1,30 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Contact | Param Sundari</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Contact – Param Sundari</title>
+<style>
+body { background:#000; color:#fff; font-family:Poppins; text-align:center; padding:20px; }
+nav { background:#000; padding:15px; }
+nav a { color:#ffb5c8; margin:10px; text-decoration:none; }
+input, textarea { width:90%; padding:12px; margin:10px; border-radius:10px; border:1px solid #ffb5c8; }
+button { width:90%; padding:12px; background:#ffb5c8; border:none; border-radius:10px; }
+</style>
 </head>
+
 <body>
-<header>
-  <h1>Param Sundari</h1>
-  <nav>
+
+<nav>
     <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="product.html">Products</a>
     <a href="contact.html">Contact</a>
-  </nav>
-</header>
+</nav>
 
-<main>
-  <section>
-    <h2 style="color:var(--rose-gold);margin-bottom:20px;">Get in Touch</h2>
-    <p>We’d love to hear from you — whether it’s a custom order or a collaboration idea.</p>
-    <p style="margin-top:10px;">📞 Call / WhatsApp: <a href="https://wa.me/919993658088" style="color:var(--rose-gold);text-decoration:none;">+91 99936 58088</a></p>
-    <p>📧 Email: <a href="mailto:paramsundari@gmail.com" style="color:var(--rose-gold);text-decoration:none;">paramsundari@gmail.com</a></p>
-  </section>
-</main>
+<h2 style="color:#ffb5c8;">Contact Us</h2>
 
-<footer><p>© 2025 Param Sundari – Custom Clothes for Couples</p></footer>
+<input id="name" placeholder="Your Name">
+<input id="phone" placeholder="Your Phone">
+<textarea id="message" placeholder="Message"></textarea>
+
+<button onclick="send()">Send on WhatsApp</button>
+
+<script>
+function send() {
+    let msg = `Hello,%0AName:${name.value}%0APhone:${phone.value}%0AMessage:${message.value}`;
+    window.location.href = `https://wa.me/9993658088?text=${msg}`;
+}
+</script>
+
 </body>
 </html>
